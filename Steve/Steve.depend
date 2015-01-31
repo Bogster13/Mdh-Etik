@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1422723036 source:c:\users\sleepless\documents\skolarbete\etik programmering\steve\main.c
+	"main.h"
+
+1422720530 c:\users\sleepless\documents\skolarbete\etik programmering\steve\main.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+
