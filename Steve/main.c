@@ -46,7 +46,7 @@ char* process(char string[])
     int prev = 0;
     int y = 0;
     int stepper = 0;
-    length = sizeof(string);
+    length = strlen(string);
     char words[40][100];
     int start = 0;
     int end = 0;
