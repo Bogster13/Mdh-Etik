@@ -5,6 +5,10 @@ struct blergh
 
 };
 
+char* question();
+char* response(info);
+char* process(char string[]);
+
 void main()
 {
     char* stringin;
