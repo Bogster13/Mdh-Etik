@@ -149,9 +149,7 @@ int mysqlanswer(int keywordid)
     if (answervalue == 0)
     {
         answerrows = 10 - answerrows; //tar värdet 20 från föregående for-loop och subtraherar med answerrows
-       // printf("%d\n", answerrows);
         n = rand()%answerrows;
-        //printf ("%d", n);
         printf("Steve: ");
         for (a = 0; a < 255; a++) {
             if (randomiseanswer [n][a] != NULL)
