@@ -51,6 +51,12 @@ char* process(char *inputpointer)
         *(wordptrs+i) = strtok(NULL," ");
 
     }
+    
+    //här ska vi lägga till en if-sats som kollar igenom varje ord i wordptrs för att se om de innehåller "metric" eller "ad"
+    //om metric eller ad hittas så skall keywordet skickas vidare till en annan funktion än "mysqlanswer"  som hämtar AD för routingprotokollet som har skrivits in
+    
+    
+    //denna funktion skickar en query till databasen med hjälp av funktionen mysqlanswer, TILL Answers-tabellen
     while(*(wordptrs+y) != NULL)
     {
         snprintf(mysqlquery, 255, "SELECT Keywords.ID FROM Keywords WHERE Keywords.Keyword = '%s'", wordptrs[y]); //används för att lägga till en variabel i mysqlquery
