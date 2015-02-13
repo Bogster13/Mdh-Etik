@@ -12,8 +12,8 @@ void main()
     char tempChar = ' ';
     int i = 0;
     int stringinLength = 0;
-    printf("Steve: Good day peasant, I am lord Stephen Lancaster of Canterbury Castle, but you may address me as Lord Steve, master of networking.\n");
-    printf("Steve: I'm an expert on Computer Newtorking and Routing Protocols. Please state your question.");
+    printf("Lord Steve: Good day peasant, I am lord Stephen Lancaster of Canterbury Castle, but you may address me as Lord Steve, master of networking.\n");
+    printf("Lord Steve: I'm an expert on Computer Newtorking and Routing Protocols. Please state your question.");
     do
     {
         printf("\nYou: ");
@@ -36,30 +36,77 @@ void main()
 char* process(char *inputpointer)
 {
     char keyword[255];
-    char *wordptrs[255];
-    char *strStripped[255];
     char mysqlquery[255];
+    char words[100][255] = {" "};
     int i=0;
     int y=0;
-    int c=0;
+    int wordsearch = 1;
+    int row = 0;
+    int steve = 0;
+    int letter = 0;
+    int stepper = 0;
     int keywordid;
     int answervalue;
-    *(wordptrs) = strtok(inputpointer," ");
-    while( *(wordptrs+i) != NULL )
-    {
-        ++i;
-        *(wordptrs+i) = strtok(NULL," ");
+    int length = 0;
+    length = strlen(inputpointer);
 
-    }
-    while(*(wordptrs+y) != NULL)
+    for(stepper = 0; stepper <= length; stepper++)
     {
-        snprintf(mysqlquery, 255, "SELECT Keywords.ID FROM Keywords WHERE Keywords.Keyword = '%s'", wordptrs[y]); //används för att lägga till en variabel i mysqlquery
-        keywordid = mysqlkeywordid(mysqlquery);
-        answervalue = mysqlanswer(keywordid);
-        ++y;
+        words[row][letter] = inputpointer[stepper];
+        letter++;
+        if(inputpointer[stepper] == ' ')
+        {
+            words[row][letter-1] = '\n';
+            row++;
+            letter = 0;
+        }
     }
-    if (answervalue == 1)
-        printf("Steve: I must admit that I did not quite understand your question.");
+    for(stepper = 0; stepper <= row; stepper++)
+    {
+        if(strcmp(words[stepper], "steve\n") == 0 || strcmp(words[stepper], "Steve\n") == 0 || strcmp(words[stepper], "steve") == 0 || strcmp(words[stepper], "Steve") == 0)
+        {
+            steve = 1;
+        }
+        if(strcmp(words[stepper], "my\n") == 0)
+        {
+            if(strcmp(words[stepper+1], "name\n") == 0 || strcmp(words[stepper+1], "name") == 0)
+            {
+                printf("\nLord Steve: I don't have the patience to remember the names of people of your stature.\n");
+                wordsearch = 0;
+            }
+        }
+        if(strcmp(words[stepper], "your\n") == 0)
+        {
+            if(strcmp(words[stepper+1], "name\n") == 0 || strcmp(words[stepper+1], "name") == 0)
+            {
+                if(steve == 0)
+                {
+                    printf("\nLord Steve: How dare you forget my name, you lowly PEASANT.\n");
+                }
+                if(steve == 1)
+                {
+                    printf("\nLord Steve: You said my name in your own sentence you arse.\n");
+                }
+
+
+                wordsearch = 0;
+            }
+        }
+    }
+    if(wordsearch)
+    {
+        for(stepper = 0; stepper <= row; stepper++)
+        {
+            snprintf(mysqlquery, 255, "SELECT Keywords.ID FROM Keywords WHERE Keywords.Keyword = '%s'", words[y]); //används för att lägga till en variabel i mysqlquery
+            keywordid = mysqlkeywordid(mysqlquery);
+            answervalue = mysqlanswer(keywordid);
+            ++y;
+        }
+        if (answervalue == 1)
+        {
+            printf("Lord Steve: I must admit that I did not quite understand your question.");
+        }
+    }
 
     return NULL;
 }

@@ -8,3 +8,53 @@
 	<string.h>
 	<time.h>
 
+1423837371 source:c:\users\sleepless\documents\github\mdh-etik\steve\main.c
+	"main.h"
+
+1423666167 c:\users\sleepless\documents\github\mdh-etik\steve\main.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<mysql.h>
+
+1402456242 c:\users\sleepless\documents\github\mdh-etik\steve\mysql-connector-c-6.1.5-win32\mysql-connector-c-6.1.5-win32\include\mysql.h
+	<sys/types.h>
+	<windows.h>
+	<winsock2.h>
+	"mysql_version.h"
+	"mysql_com.h"
+	"mysql_time.h"
+	"my_list.h"
+	"mysql/client_plugin.h"
+	"typelib.h"
+	"my_alloc.h"
+
+1402460310 c:\users\sleepless\documents\github\mdh-etik\steve\mysql-connector-c-6.1.5-win32\mysql-connector-c-6.1.5-win32\include\mysql_version.h
+	<custom_conf.h>
+
+1402456242 c:\users\sleepless\documents\github\mdh-etik\steve\mysql-connector-c-6.1.5-win32\mysql-connector-c-6.1.5-win32\include\mysql_com.h
+
+1402456242 c:\users\sleepless\documents\github\mdh-etik\steve\mysql-connector-c-6.1.5-win32\mysql-connector-c-6.1.5-win32\include\mysql_time.h
+
+1402456242 c:\users\sleepless\documents\github\mdh-etik\steve\mysql-connector-c-6.1.5-win32\mysql-connector-c-6.1.5-win32\include\my_list.h
+
+1402456244 c:\users\sleepless\documents\github\mdh-etik\steve\mysql-connector-c-6.1.5-win32\mysql-connector-c-6.1.5-win32\include\mysql\client_plugin.h
+	<stdarg.h>
+	<stdlib.h>
+	<mysql/plugin_auth_common.h>
+
+1402456244 c:\users\sleepless\documents\github\mdh-etik\steve\mysql-connector-c-6.1.5-win32\mysql-connector-c-6.1.5-win32\include\mysql\plugin_auth_common.h
+	<windows.h>
+
+1402456242 c:\users\sleepless\documents\github\mdh-etik\steve\mysql-connector-c-6.1.5-win32\mysql-connector-c-6.1.5-win32\include\typelib.h
+	"my_alloc.h"
+
+1402456242 c:\users\sleepless\documents\github\mdh-etik\steve\mysql-connector-c-6.1.5-win32\mysql-connector-c-6.1.5-win32\include\my_alloc.h
+	<mysql/psi/psi_memory.h>
+
+1402456244 c:\users\sleepless\documents\github\mdh-etik\steve\mysql-connector-c-6.1.5-win32\mysql-connector-c-6.1.5-win32\include\mysql\psi\psi_memory.h
+	"psi_base.h"
+
+1402456244 c:\users\sleepless\documents\github\mdh-etik\steve\mysql-connector-c-6.1.5-win32\mysql-connector-c-6.1.5-win32\include\mysql\psi\psi_base.h
+
