@@ -82,32 +82,29 @@ char* process(char *inputpointer)
                 if(steve == 0)
                 {
                     printf("\nLord Steve: How dare you forget my name, you lowly PEASANT.\n");
+                    wordsearch = 0;
                 }
                 if(steve == 1)
                 {
                     printf("\nLord Steve: You said my name in your own sentence you arse.\n");
+                    wordsearch = 0;
                 }
 
-
-                wordsearch = 0;
             }
         }
     }
-<<<<<<< HEAD
-    if(wordsearch)
-=======
-    
+
+
     //här ska vi lägga till en if-sats som kollar igenom varje ord i wordptrs för att se om de innehåller "metric" eller "ad"
     //om metric eller ad hittas så skall keywordet skickas vidare till en annan funktion än "mysqlanswer"  som hämtar AD för routingprotokollet som har skrivits in
-    
-    
+
+
     //denna funktion skickar en query till databasen med hjälp av funktionen mysqlanswer, TILL Answers-tabellen
-    while(*(wordptrs+y) != NULL)
->>>>>>> origin/master
+    if(wordsearch == 1)
     {
         for(stepper = 0; stepper <= row; stepper++)
         {
-            snprintf(mysqlquery, 255, "SELECT Keywords.ID FROM Keywords WHERE Keywords.Keyword = '%s'", words[y]); //används för att lägga till en variabel i mysqlquery
+            snprintf(mysqlquery, 255, "SELECT Keywords.ID FROM Keywords WHERE Keywords.Keyword = '%s'", words[stepper]); //används för att lägga till en variabel i mysqlquery
             keywordid = mysqlkeywordid(mysqlquery);
             answervalue = mysqlanswer(keywordid);
             ++y;
@@ -117,6 +114,12 @@ char* process(char *inputpointer)
             printf("Lord Steve: I must admit that I did not quite understand your question.");
         }
     }
+
+    if(wordsearch == 2)
+    {
+
+    }
+
 
     return NULL;
 }
