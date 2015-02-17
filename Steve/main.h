@@ -4,5 +4,8 @@
 #include <time.h>
 #include <mysql.h>
 
-char* response();
-char* question();
+char* process(char string[]);
+int mysqlkeywordid();
+int mysqlanswer();
+int diffSQL();
+int ADSQL();
