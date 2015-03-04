@@ -5,6 +5,8 @@ void main()
     char* stringin = (char*) calloc(2048, sizeof(char));
     char tempChar = ' ';
     int i = 0;
+    int donkey = 0;
+    int random = 0;
     int stringinLength = 0;
     printf("Lord Steve: Good day peasant, I am lord Stephen Lancaster of Canterbury Castle, but you may address me as Lord Steve, master of networking.\n");
     printf("Lord Steve: I'm an expert on Computer Newtorking and Routing Protocols. Please state your question.");
@@ -15,19 +17,38 @@ void main()
 
         //replace any special characters in stringin with space
         stringinLength = strlen(stringin);
-        for (i=0; i<stringinLength; i++)
+        for (i=0; i<=stringinLength; i++)
         {
             if (stringin[i] == '?' || stringin[i] == '.' || stringin[i] == '!' || stringin[i] == '"' || stringin[i] == '\''  || stringin[i] == '+' || stringin[i] == ',' || stringin[i] == '&')
                 stringin[i] = ' ';
         }
-        process(stringin);
+        process(stringin, &donkey);
+        if(donkey == 3)
+        {
+            srand(time(NULL));
+            random = rand() % 2;
+            if(random == 0)
+            {
+                printf("\nLord Steve: I've had enough of your tomfoolery, BEGONE...\n");
+                printf("\nLORD STEVE HAS LEFT THE BUILDING.\n");
+                Sleep(2000);
+                return 0;
+            }
+            if(random == 1)
+            {
+                printf("\nLord Steve: YOU GET NOTHING.\n");
+                printf("\nLORD STEVE HAS TILTED OUT.\n");
+                Sleep(2000);
+                return 0;
+            }
+        }
 
     } while (1);
     system("pause");
     system("exit");
 }
 
-char* process(char *inputpointer)
+char* process(char *inputpointer, int *donkey)
 {
     char keyword[255];
     char mysqlquery[255];
@@ -46,37 +67,38 @@ char* process(char *inputpointer)
     int length = 0;
     int cmp = 0;
     int wordlen = 0;
+
     int nomore = 0;
     length = strlen(inputpointer);
 
-    for(stepper = 0; stepper <= length; stepper++)
+    for(stepper = 0; stepper <= length+1; stepper++)
     {
         words[row][letter] = inputpointer[stepper];
         letter++;
         if(inputpointer[stepper] == ' ')
         {
-            words[row][letter-1] = '\n';
+            words[row][letter-1] = '\0';
             row++;
             letter = 0;
         }
     }
     for(stepper = 0; stepper <= row; stepper++)
     {
-        if(strcmp(words[stepper], "steve\n") == 0 || strcmp(words[stepper], "Steve\n") == 0 || strcmp(words[stepper], "steve") == 0 || strcmp(words[stepper], "Steve") == 0)
+        if(strcmp(words[stepper], "steve\0") == 0 || strcmp(words[stepper], "Steve\0") == 0 || strcmp(words[stepper], "steve") == 0 || strcmp(words[stepper], "Steve") == 0)
         {
             steve = 1;
         }
-        if(strcmp(words[stepper], "my\n") == 0)
+        if(strcmp(words[stepper], "my\0") == 0)
         {
-            if(strcmp(words[stepper+1], "name\n") == 0 || strcmp(words[stepper+1], "name") == 0)
+            if(strcmp(words[stepper+1], "name\0") == 0 || strcmp(words[stepper+1], "name") == 0)
             {
                 printf("\nLord Steve: I don't have the patience to remember the names of people of your stature.\n");
                 wordsearch = 0;
             }
         }
-        if(strcmp(words[stepper], "your\n") == 0)
+        if(strcmp(words[stepper], "your\0") == 0)
         {
-            if(strcmp(words[stepper+1], "name\n") == 0 || strcmp(words[stepper+1], "name") == 0)
+            if(strcmp(words[stepper+1], "name\0") == 0 || strcmp(words[stepper+1], "name") == 0)
             {
                 if(steve == 0)
                 {
@@ -87,22 +109,24 @@ char* process(char *inputpointer)
                 {
                     printf("\nLord Steve: You said my name in your own sentence you arse.\n");
                     wordsearch = 0;
+                    *donkey = *donkey +1;
+
                 }
             }
         }
-        if(strcmp(words[stepper], "difference\n") == 0 || strcmp(words[stepper], "difference") == 0)
+        if(strcmp(words[stepper], "difference\0") == 0 || strcmp(words[stepper], "difference") == 0)
         {
             for(x = 0; x <= row; x++)
             {
 
-                if(strcmp(words[x], "and\n") == 0 || strcmp(words[x], "and") == 0)
+                if(strcmp(words[x], "and\0") == 0 || strcmp(words[x], "and") == 0)
                 {
                     wordsearch = 2;
 
                 }
             }
         }
-        if(strcmp(words[stepper], "AD\n") == 0 || strcmp(words[stepper], "AD") == 0 || strcmp(words[stepper], "ad\n") == 0 || strcmp(words[stepper], "ad") == 0)
+        if(strcmp(words[stepper], "AD\0") == 0 || strcmp(words[stepper], "AD") == 0 || strcmp(words[stepper], "ad\0") == 0 || strcmp(words[stepper], "ad") == 0)
         {
             wordsearch = 3;
         }
@@ -124,7 +148,7 @@ char* process(char *inputpointer)
         }
         if (answervalue == 1)
         {
-            printf("Lord Steve: I must admit that I did not quite understand your question.");
+            printf("\nLord Steve: I must admit that I did not quite understand your question.");
         }
     }
 
@@ -132,28 +156,34 @@ char* process(char *inputpointer)
     {
         for(x = 0; x <= row; x++)
         {
-            if(strcmp(words[x], "and\n") == 0 || strcmp(words[x], "and") == 0)
+            if(strcmp(words[x], "and\0") == 0 || strcmp(words[x], "and") == 0)
             {
 
-                if(strcmp(words[x-1], words[+1]) <0 )
+                if(strcmp(words[x-1], words[x+1]) <0 )
                 {
                     wordlen = strlen(words[x-1]);
-                    words[x-1][wordlen-1] = '\0';
                     strcpy(differencestring, words[x-1]);
                     strcat(differencestring, words[x+1]);
                     snprintf(mysqlquery, 255, "SELECT ID FROM KeywordsD WHERE KeywordsD.KeywordD = '%s'", differencestring);
                     keywordid = mysqlkeywordid(mysqlquery);
                     answervalue = diffSQL(keywordid);
+                    if (answervalue == 1)
+                    {
+                        printf("\nLord Steve: I must admit that I did not quite understand your question.");
+                    }
                 }
-                if(strcmp(words[x-1], words[+1]) >0 )
+                if(strcmp(words[x-1], words[x+1]) >0 )
                 {
                     wordlen = strlen(words[x-1]);
-                    words[x-1][wordlen-1] = '\0';
                     strcpy(differencestring, words[x+1]);
                     strcat(differencestring, words[x-1]);
                     snprintf(mysqlquery, 255, "SELECT ID FROM KeywordsD WHERE KeywordsD.KeywordD = '%s'", differencestring);
                     keywordid = mysqlkeywordid(mysqlquery);
                     answervalue = diffSQL(keywordid);
+                    if (answervalue == 1)
+                    {
+                        printf("\nLord Steve: I must admit that I did not quite understand your question.");
+                    }
                 }
                 if(strcmp(words[x-1], words[+1]) == 0 )
                 {
@@ -161,6 +191,7 @@ char* process(char *inputpointer)
                 }
 
             }
+
         }
 
 
@@ -169,9 +200,14 @@ char* process(char *inputpointer)
     {
         for(stepper = 0; stepper <= row; stepper++)
         {
-            snprintf(mysqlquery, 255, "SELECT Keywords.ID FROM Keywords WHERE Keywords.Keyword = '%s'", words[stepper]); //används för att lägga till en variabel i mysqlquery
+            snprintf(mysqlquery, 255, "SELECT Keywords.ID FROM Keywords WHERE Keywords.Keyword LIKE '%s%'", words[stepper]); //används för att lägga till en variabel i mysqlquery
             keywordid = mysqlkeywordid(mysqlquery);
             answervalue = ADSQL(keywordid);
+
+        }
+        if (answervalue == 1)
+        {
+                printf("\nLord Steve: I must admit that I did not quite understand your question.");
         }
 }
 
@@ -228,7 +264,7 @@ int mysqlanswer(int keywordid)
     char mysqlquery[255];
     int i = 0;
     int n, z, a;
-    int answervalue;
+    int answervalue = 0;
     int answerrows=0;
     srand(time(NULL));
     snprintf(mysqlquery, 255, "SELECT Answer FROM Answers WHERE Answers.Keyword_ID = '%d'", keywordid); //används för att lägga till en variabel i mysqlquery
@@ -255,7 +291,9 @@ int mysqlanswer(int keywordid)
         i++;
     }
     if (((row = mysql_fetch_row(res)) == NULL) && i == 0)
+    {
         answervalue = 1;
+    }
 
     for (z = 0; z < 10; z++) {
         if (randomiseanswer[z][0] == NULL)
@@ -265,11 +303,12 @@ int mysqlanswer(int keywordid)
     {
         answerrows = 10 - answerrows; //tar värdet 20 från föregående for-loop och subtraherar med answerrows
         n = rand()%answerrows;
-        printf("Steve: ");
-        for (a = 0; a < 255; a++) {
-            if (randomiseanswer [n][a] != NULL)
-                printf("%c", randomiseanswer[n][a]);
-        }
+        printf("\nLord Steve: %s\n", randomiseanswer[n]);
+
+        //for (a = 0; a < 255; a++) {
+          //  if (randomiseanswer [n][a] != NULL)
+            //    printf("%c", randomiseanswer[n][a]);
+        //}
     }
     mysql_free_result(res);
     mysql_close(conn);
@@ -290,7 +329,7 @@ int diffSQL(int keywordid)
     char mysqlquery[255];
     int i = 0;
     int n, z, a;
-    int answervalue;
+    int answervalue = 0;
     int answerrows=0;
     srand(time(NULL));
     snprintf(mysqlquery, 255, "SELECT Difference FROM Differences WHERE Differences.KeywordD_ID = '%d'", keywordid); //används för att lägga till en variabel i mysqlquery
@@ -327,11 +366,11 @@ int diffSQL(int keywordid)
     {
         answerrows = 10 - answerrows; //tar värdet 20 från föregående for-loop och subtraherar med answerrows
         n = rand()%answerrows;
-        printf("Steve: ");
-        for (a = 0; a < 255; a++) {
-            if (randomiseanswer [n][a] != NULL)
-                printf("%c", randomiseanswer[n][a]);
-        }
+        printf("\nLord Steve: %s\n", randomiseanswer[n]);
+        //for (a = 0; a < 255; a++) {
+          //  if (randomiseanswer [n][a] != NULL)
+            //    printf("%c", randomiseanswer[n][a]);
+        //}
     }
     mysql_free_result(res);
     mysql_close(conn);
@@ -352,7 +391,7 @@ int ADSQL(int keywordid)
     char mysqlquery[255];
     int i = 0;
     int n, z, a;
-    int answervalue;
+    int answervalue = 0;
     int answerrows=0;
     srand(time(NULL));
     snprintf(mysqlquery, 255, "SELECT AD FROM ADs WHERE ADs.Keyword_ID = '%d'", keywordid); //används för att lägga till en variabel i mysqlquery
@@ -389,11 +428,8 @@ int ADSQL(int keywordid)
     {
         answerrows = 10 - answerrows; //tar värdet 20 från föregående for-loop och subtraherar med answerrows
         n = rand()%answerrows;
-        printf("Steve: ");
-        for (a = 0; a < 255; a++) {
-            if (randomiseanswer [n][a] != NULL)
-                printf("%c", randomiseanswer[n][a]);
-        }
+        printf("\nLord Steve: %s\n", randomiseanswer[n]);
+
     }
     mysql_free_result(res);
     mysql_close(conn);
