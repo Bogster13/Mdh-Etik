@@ -3,8 +3,9 @@
 #include <string.h>
 #include <time.h>
 #include <mysql.h>
+#include <windows.h>
 
-char* process(char string[]);
+char* process();
 int mysqlkeywordid();
 int mysqlanswer();
 int diffSQL();
